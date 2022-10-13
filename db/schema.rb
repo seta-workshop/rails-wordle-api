@@ -12,9 +12,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_161219) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_13_163027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "match_words", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.text "mode"
+    t.datetime "clock"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tries", force: :cascade do |t|
+    t.decimal "count"
+    t.text "letters", default: [], array: true
+    t.text "letters_colours", default: [], array: true
+    t.bigint "user_id"
+    t.bigint "match_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_tries_on_match_id"
+    t.index ["user_id"], name: "index_tries_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -29,6 +53,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_161219) do
     t.string "unconfirmed_email"
     t.string "reset_email_token"
     t.datetime "reset_email_sent_at"
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.text "kind"
+    t.text "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
