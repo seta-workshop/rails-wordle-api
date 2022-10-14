@@ -4,6 +4,8 @@ class User < ApplicationRecord
   require "securerandom"
   has_secure_password
 
+  has_many :matches
+
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
