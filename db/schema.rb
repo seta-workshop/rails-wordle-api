@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -16,8 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_143253) do
 
   create_table "attempts", force: :cascade do |t|
     t.integer "count", default: 0
-    t.text "letters", default: [], array: true
-    t.text "letters_colours", default: [], array: true
+    t.string "letters", default: [], array: true
+    t.string "letters_colours", default: [], array: true
     t.bigint "user_id"
     t.bigint "match_id"
     t.datetime "created_at", null: false
@@ -53,8 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_143253) do
   end
 
   create_table "words", force: :cascade do |t|
-    t.integer "kind"
-    t.text "value"
+    t.integer "kind", default: 0
+    t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

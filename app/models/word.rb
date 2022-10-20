@@ -5,21 +5,18 @@ class Word < ApplicationRecord
 
   validate :length_fits_kind, on: :create
 
-  has_many :match_words
-  has_many :matches, through: :match_words
+  # validates :kind, inclusion: { in: kinds.keys, message: "Kind is not valid.\n Valid values: basic, scientific and custom" }
 
   validates :value, presence: true, uniqueness: true, length: {minimum: 5, maximum: 7}
-  validates :kind, presence: true
 
   private
 
   def length_fits_kind
-    if self.kind == 'basic' && self.value.length != 5
-      return errors.add("\'basic\' kind of words must be only 5 characters long")
+    if self.basic? && self.value.length != 5
+      return errors.add(:kind, '\'basic\' kind of words must be only 5 characters long')
 
-    elsif self.kind == 'scientific' && self.value.length != 7
-      return errors.add("\'scientific\' kind of words must be only 7 characters long")
-
+    elsif self.scientific? && self.value.length != 7
+      return errors.add(:kind, '\'scientific\' kind of words must be only 7 characters long')
     end
   end
 
