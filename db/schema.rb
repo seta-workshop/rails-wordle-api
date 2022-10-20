@@ -12,9 +12,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_161219) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_14_143253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attempts", force: :cascade do |t|
+    t.integer "count", default: 0
+    t.string "letters", default: [], array: true
+    t.string "letters_colours", default: [], array: true
+    t.bigint "user_id"
+    t.bigint "match_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_attempts_on_match_id"
+    t.index ["user_id"], name: "index_attempts_on_user_id"
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "mode", default: 0
+    t.datetime "finished_at"
+    t.bigint "user_id"
+    t.bigint "word_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_matches_on_user_id"
+    t.index ["word_id"], name: "index_matches_on_word_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -29,6 +52,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_161219) do
     t.string "unconfirmed_email"
     t.string "reset_email_token"
     t.datetime "reset_email_sent_at"
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.integer "kind", default: 0
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

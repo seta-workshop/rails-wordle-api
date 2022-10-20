@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  require "securerandom"
+  require 'securerandom'
   has_secure_password
+
+  has_many :matches
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
@@ -51,12 +53,12 @@ class User < ApplicationRecord
   end
 
   def self.email_used?(email)
-    existing_user = find_by("email = ?", email)
+    existing_user = find_by('email = ?', email)
 
     if existing_user.present?
       return true
     else
-      waiting_for_confirmation = find_by("unconfirmed_email = ?", email)
+      waiting_for_confirmation = find_by('unconfirmed_email = ?', email)
       return waiting_for_confirmation.present? && waiting_for_confirmation.email_token_valid?
     end
   end
