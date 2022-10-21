@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   end
 
   resources(:emails, only: [:create, :update], param: :token)
+
+  resources(:matches, only: [:create, :update, :index])
 end

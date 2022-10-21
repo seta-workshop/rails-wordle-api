@@ -81,6 +81,5 @@ RSpec.describe 'EmailUpdate Service', type: :service do
         expect(service_call.messages).to eq(['Email confirmation has been sent.'])
       end
     end
-
   end
 end
