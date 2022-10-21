@@ -6,11 +6,11 @@ RSpec.describe 'Create Match Service', type: :service do
   subject(:service_call) { Matches::Create.call(params: params, user: user) }
   let(:params) {  }
   let(:user) { create(:user) }
-  let!(:word) { Word.create(kind:'basic', value:'siete') }
+  let!(:word) { create(:word, kind: 'basic', value: 'siete') }
 
   context 'service is called' do
     context 'User has a match associated today' do
-      let!(:match) { Match.create(mode:'basic', user_id: user.id, word_id: word.id) }
+      let!(:match) { create(:match, mode:'basic', user: user, word: word) }
 
       it 'Returns current match from user' do
         expect(service_call.object.id).to eq(match.id)

@@ -8,22 +8,17 @@ module Matches
     end
 
     def call
-      return ServiceResult.new(errors: ['User not present']) unless @user
+      return ServiceResult.new(errors: ['User not present']) unless user
 
-      user_has_match
+      ServiceResult.new(object: match, messages:['Current match'])
     end
 
     private
 
-    attr_reader :params
+    attr_reader :params, :user
 
-    def user_has_match
-      match = Match.find_or_create_by(user_id: @user.id) do |m|
-        m.user_id = @user.id
-        m.word_id = Word.last.id
-        m.mode = 'basic'
-      end
-      ServiceResult.new(object: match, messages:['Current match'])
+    def match
+      user.matches.find_or_create_by!(word_id: Word.last.id, mode: 'basic')
     end
   end
 end
