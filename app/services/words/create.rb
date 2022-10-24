@@ -6,19 +6,15 @@ module Words
     end
 
     def call
-      ServiceResult.new(object: word, messages:['Current word'])
+      ServiceResult.new(object: word!, messages:['Current word'])
     end
 
     private
     attr_reader :params
 
-    def word
-      range = (DateTime.now..DateTime.now.end_of_day)
-      word = Word.where(created_at: range)
-      if word.empty?
-        word = Word.create(kind:'basic', value: Faker::Lorem.characters(number: 5))
-      end
-      return word
+    def word!
+      range = (Time.current.beginning_of_day..Time.current.end_of_day)
+      return Word.find_by(created_at: range) || Word.create!(kind:'basic', value: Faker::Lorem.characters(number: 5))
     end
 
   end
