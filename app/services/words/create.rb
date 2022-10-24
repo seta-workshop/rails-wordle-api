@@ -13,8 +13,12 @@ module Words
     attr_reader :params
 
     def word
-      range = (DateTime.now.beginning_of_day..DateTime.now.end_of_day)
-      return Word.find_or_create_by!(created_at: range, kind: 'basic', value: 'siete')
+      range = (DateTime.now..DateTime.now.end_of_day)
+      word = Word.where(created_at: range)
+      if word.empty?
+        word = Word.create(kind:'basic', value: Faker::Lorem.characters(number: 5))
+      end
+      return word
     end
 
   end
