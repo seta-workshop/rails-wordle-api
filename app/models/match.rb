@@ -5,6 +5,7 @@ class Match < ApplicationRecord
 
   belongs_to :word
   belongs_to :user
+  has_many :attempts
 
   validates :mode, presence: true
 end

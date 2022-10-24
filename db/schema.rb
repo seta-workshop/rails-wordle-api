@@ -43,6 +43,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_143253) do
     t.string "name"
     t.string "email"
     t.string "password"
+    t.integer "victories"
+    t.integer "losses"
+    t.integer "streak"
+    t.integer "best_streak"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
