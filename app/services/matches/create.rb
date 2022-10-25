@@ -2,8 +2,7 @@
 
 module Matches
   class Create < Service
-    def initialize(params:, user:)
-      @params = params
+    def initialize(user:)
       @user = user
     end
 
@@ -15,7 +14,7 @@ module Matches
 
     private
 
-    attr_reader :params, :user
+    attr_reader :user
 
     def match!
       user.matches.find_or_create_by!(word_id: word!.id, mode: 'basic')
