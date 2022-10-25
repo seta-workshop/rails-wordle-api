@@ -11,7 +11,11 @@ module Attempts
       return ServiceResult.new(errors:['Only 5 characters are supported in basic mode']) if basic?
       return ServiceResult.new(errors:['Only 7 characters are supported in scientific mode']) if scientific?
 
-      ServiceResult.new(object: attempt, messages:["Attempt: #{attempt.count}, Match: #{match.id}"])
+      ServiceResult.new(
+        object: attempt,
+        messages:["Attempt: #{attempt.count}, Match: #{match.id}"],
+        errors: attempt.errors.full_messages
+      )
     end
 
     private
