@@ -37,11 +37,11 @@ module Attempts
     end
 
     def basic?
-      match.basic? && letters.length == 5
+      match.basic? && letters.length != 5
     end
 
     def scientific?
-      match.scientific? && letters.length == 7
+      match.scientific? && letters.length != 7
     end
   end
 end
