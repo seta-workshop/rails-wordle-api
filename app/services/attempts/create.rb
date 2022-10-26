@@ -10,6 +10,10 @@ module Attempts
     def call
       return ServiceResult.new(errors:['Only 5 characters are supported in basic mode']) if basic?
       return ServiceResult.new(errors:['Only 7 characters are supported in scientific mode']) if scientific?
+      return ServiceResult.new(object: match, messages:['You lose. Match has finished.']) if has_lost?
+      return ServiceResult.new(object: match, messages:['You win. Match has finished.']) if has_won?
+
+      check_answer
 
       ServiceResult.new(
         object: attempt,
@@ -43,5 +47,28 @@ module Attempts
     def scientific?
       match.scientific? && letters.length != 7
     end
+
+    def has_won?
+      match.win?
+    end
+
+    def has_lost?
+      match.lose?
+    end
+
+    def check_answer
+      if params[:word] == (match.word.value)
+        match.finished_at = DateTime.current
+        match.status = 1
+        match.save!
+      else
+        if match.attempts.count == 5
+          match.finished_at = DateTime.current
+          match.status = 2
+          match.save!
+        end
+      end
+    end
+
   end
 end

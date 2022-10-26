@@ -14,7 +14,7 @@ module Words
 
     def word!
       range = (Time.current.beginning_of_day..Time.current.end_of_day)
-      return Word.find_by(created_at: range) || Word.create!(kind:'basic', value: Faker::Lorem.characters(number: 5))
+      return Word.find_by(created_at: range) || Word.create!(kind:'basic', value: 'siete')
     end
 
   end

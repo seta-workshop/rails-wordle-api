@@ -11,7 +11,7 @@ module Matches
       return ServiceResult.new(errors: ['User not present']) unless user
       return word_result unless !word_result.success?
 
-      ServiceResult.new(object: match!, messages:['Current match'])
+      ServiceResult.new(object: match, messages:['Current match'])
     end
 
     private
