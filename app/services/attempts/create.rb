@@ -10,8 +10,8 @@ module Attempts
     def call
       return ServiceResult.new(errors:['Only 5 characters are supported in basic mode']) if basic?
       return ServiceResult.new(errors:['Only 7 characters are supported in scientific mode']) if scientific?
-      return ServiceResult.new(object: match, messages:['You lose. Match has finished.']) if has_lost?
-      return ServiceResult.new(object: match, messages:['You win. Match has finished.']) if has_won?
+      return ServiceResult.new(messages:['You lose. Match has finished.']) if has_lost?
+      return ServiceResult.new(messages:['You win. Match has finished.']) if has_won?
 
       check_answer
 
