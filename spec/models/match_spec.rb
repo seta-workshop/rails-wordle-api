@@ -35,5 +35,30 @@ RSpec.describe 'Match model', type: :model do
       end
     end
 
+    context 'when maximum attempts is reached'do
+      let(:match) { create(:match, mode: 'basic', user: user, word: word) }
+
+      before(:each) do
+        6.times do
+          match.attempts.create(
+            user_id: match.user_id,
+            letters: ['a','a','a','a','a'],
+            letters_colours: ['a','a','a','a','a']
+          )
+        end
+      end
+
+      it 'returns \'Max attempts reached\'' do
+        a = match.attempts.create(
+          user_id: match.user_id,
+          letters: ['a','a','a','a','a'],
+          letters_colours: ['a','a','a','a','a']
+        )
+
+        # expect(a).to be_invalid
+        expect(a.errors.full_messages).to eq(['Max attempts reached'])
+      end
+    end
+
   end
 end

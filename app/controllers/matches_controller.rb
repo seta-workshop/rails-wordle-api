@@ -2,7 +2,7 @@
 
 class MatchesController < ApplicationController
   def create
-    result = Matches::Create.call(params: params, user: @current_user)
+    result = Matches::Create.call(params: params, user: current_user)
     if result.success?
       render(json: { object: result.object, messages:result.messages, status: :ok })
     else

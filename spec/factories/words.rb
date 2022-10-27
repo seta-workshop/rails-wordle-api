@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :word do
       kind { 'basic' }
-      value { Faker::Lorem.word(5) }
+      value { Faker::Lorem.characters(number: 5) }
     # trait :basic do
     #   kind { 'basic' }
     #   value { Faker::Lorem.words(5) }
