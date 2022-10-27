@@ -2,7 +2,9 @@
 
 module Words
   class Create < Service
-    def initialize()
+
+    def initialize(kind: )
+      @kind = kind
     end
 
     def call
@@ -10,11 +12,31 @@ module Words
     end
 
     private
-    attr_reader :params
+    attr_reader :kind
 
     def word!
       range = (Time.current.beginning_of_day..Time.current.end_of_day)
-      return Word.find_by(created_at: range) || Word.create!(kind:'basic', value: 'siete')
+
+      Word.find_by(kind: kind, created_at: range) || generate_from_dictionary
+    end
+
+    def generate_from_dictionary
+      path = File.join(Rails.root, 'lib', 'files','words.txt')
+      file = File.open(path, "r")
+
+      file.each_line do |line|
+        value = line[0..4]
+        created = false
+        byebug
+
+        if !Word.find_by(value: value)
+          if !created
+            return Word.create(kind:'basic', value: value)
+            created = true
+          end
+        end
+      end
+      f.close
     end
 
   end
