@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :match do
-
+    mode { 'basic' }
   end
 end

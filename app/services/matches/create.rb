@@ -2,27 +2,34 @@
 
 module Matches
   class Create < Service
-    def initialize(user:)
+    def initialize(params:, user:)
+      @params = params
       @user = user
     end
 
     def call
       return ServiceResult.new(errors: ['User not present']) unless user
+      return word_result unless !word_result.success?
 
       ServiceResult.new(object: match!, messages:['Current match'])
     end
 
     private
 
-    attr_reader :user
+    attr_reader :params, :user
 
-    def match!
-      user.matches.find_or_create_by!(word_id: word!.id, mode: 'basic')
+    def find_or_create_match!
+      user.matches.find_or_create_by!(word_id: word.id, mode: 'basic')
     end
 
-    def word!
-      word_result ||= Words::Create.call
-      return word_result.object unless !word_result.success?
+    alias_method :match, :find_or_create_match!
+
+    def word_result
+      @word_result ||= Words::Create.call(kind: params[:mode])
+    end
+
+    def word
+      word_result.object
     end
   end
 end
