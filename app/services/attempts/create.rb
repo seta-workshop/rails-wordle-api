@@ -30,8 +30,6 @@ module Attempts
       @letters ||= params[:word].split('')
     end
 
-    alias_method :letters_colours, :letters
-
     def attempt
       @attempt ||= match.attempts.create!(
         user_id: match.user_id,
@@ -54,6 +52,25 @@ module Attempts
 
     def has_lost?
       match.lose?
+    end
+
+    def letters_colours
+      colours = []
+      match_word_letters = Word.find_by(id: match.word_id).value.split('')
+
+      for i in 0..5
+        letter = letters[i]
+        match_letter = match_word_letters[i]
+        if letter == match_letter
+          colours[i] = 'green'
+        elsif match_word_letters.include?(letter)
+          colours[i] = 'yellow'
+        else
+          colours[i] = 'grey'
+        end
+      end
+
+      colours
     end
 
     def check_answer
