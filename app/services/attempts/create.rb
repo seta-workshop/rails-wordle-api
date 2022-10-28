@@ -57,14 +57,25 @@ module Attempts
     end
 
     def check_answer
+      user = User.find_by(id: match.user_id)
       if params[:word] == (match.word.value)
         match.finished_at = DateTime.current
         match.status = 1
         match.save!
+        user.streak += 1
+        if user.streak > user.best_streak
+          user.best_streak = user.streak
+        end
+        user.wins += 1
+        user.save!
       else
         if match.attempts.count == 5
           match.finished_at = DateTime.current
           match.status = 2
+          user.streak = 0
+          user.losses += 1
+
+          user.save!
           match.save!
         end
       end

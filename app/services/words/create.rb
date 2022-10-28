@@ -27,7 +27,6 @@ module Words
       file.each_line do |line|
         value = line[0..4]
         created = false
-        byebug
 
         if !Word.find_by(value: value)
           if !created

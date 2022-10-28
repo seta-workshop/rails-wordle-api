@@ -51,10 +51,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_152600) do
     t.string "unconfirmed_email"
     t.string "reset_email_token"
     t.datetime "reset_email_sent_at"
-    t.integer "wins"
-    t.integer "losses"
-    t.integer "streak"
-    t.integer "best_streak"
+    t.integer "wins", default: 0
+    t.integer "losses", default: 0
+    t.integer "streak", default: 0
+    t.integer "best_streak", default: 0
   end
 
   create_table "words", force: :cascade do |t|
