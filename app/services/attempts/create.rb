@@ -56,10 +56,11 @@ module Attempts
 
     def letters_colours
       colours = []
-      match_word_letters = Word.find_by(id: match.word_id).value.split('')
+      match_word = Word.find_by(id: match.word_id).value.downcase
+      match_word_letters = match_word.split('')
 
-      for i in 0..5
-        letter = letters[i]
+      for i in 0..match_word_letters.length-1
+        letter = letters[i].downcase
         match_letter = match_word_letters[i]
         if letter == match_letter
           colours[i] = 'green'
