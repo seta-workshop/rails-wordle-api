@@ -8,9 +8,11 @@ module Matches
     end
 
     def call
+      # Errors
       return ServiceResult.new(errors: ['User not present']) unless user
-      return word_result unless !word_result.success?
+      return word_result unless word_result.success?
 
+      # Success
       ServiceResult.new(object: match, messages:['Current match'])
     end
 
