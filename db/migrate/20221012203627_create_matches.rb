@@ -7,7 +7,6 @@ class CreateMatches < ActiveRecord::Migration[7.0]
       t.datetime :finished_at
       t.references :user
       t.references :word
-      t.integer :status, default: 0
       t.timestamps
     end
   end

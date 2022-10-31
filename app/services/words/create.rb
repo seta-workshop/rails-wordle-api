@@ -2,19 +2,18 @@
 
 module Words
   class Create < Service
-
-    def initialize(kind: )
+    def initialize(kind:)
       @kind = kind
     end
 
     def call
-      ServiceResult.new(object: word!, messages:['Current word'])
+      ServiceResult.new(object: word, messages:['Current word'])
     end
 
     private
     attr_reader :kind
 
-    def word!
+    def word
       range = (Time.current.beginning_of_day..Time.current.end_of_day)
 
       Word.find_by(kind: kind, created_at: range) || generate_from_dictionary

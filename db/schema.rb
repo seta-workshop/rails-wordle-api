@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_28_152600) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_31_203606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,9 +33,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_152600) do
     t.datetime "finished_at"
     t.bigint "user_id"
     t.bigint "word_id"
-    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["user_id"], name: "index_matches_on_user_id"
     t.index ["word_id"], name: "index_matches_on_word_id"
   end

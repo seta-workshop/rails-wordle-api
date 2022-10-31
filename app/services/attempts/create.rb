@@ -38,6 +38,14 @@ module Attempts
       )
     end
 
+    def letters_colours
+      word = Word.find(match.word_id).value
+      try = params[:word]
+      result = Attempts::Colors.call(word: word, try: try).object[:result]
+
+      result
+    end
+
     def basic?
       match.basic? && letters.length != 5
     end
@@ -52,26 +60,6 @@ module Attempts
 
     def has_lost?
       match.lose?
-    end
-
-    def letters_colours
-      colours = []
-      match_word = Word.find_by(id: match.word_id).value.downcase
-      match_word_letters = match_word.split('')
-
-      for i in 0..match_word_letters.length-1
-        letter = letters[i].downcase
-        match_letter = match_word_letters[i]
-        if letter == match_letter
-          colours[i] = 'green'
-        elsif match_word_letters.include?(letter)
-          colours[i] = 'yellow'
-        else
-          colours[i] = 'grey'
-        end
-      end
-
-      colours
     end
 
     def check_answer
