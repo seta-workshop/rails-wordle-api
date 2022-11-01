@@ -28,10 +28,7 @@ module Words
         created = false
 
         if !Word.find_by(value: value)
-          if !created
-            return Word.create(kind:'basic', value: value)
-            created = true
-          end
+          return Word.create(kind:'basic', value: value)
         end
       end
       f.close
