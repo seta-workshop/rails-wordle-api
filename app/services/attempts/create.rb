@@ -8,18 +8,12 @@ module Attempts
     end
 
     def call
-      return ServiceResult.new(errors:['Only 5 characters are supported in basic mode']) if basic?
-      return ServiceResult.new(errors:['Only 7 characters are supported in scientific mode']) if scientific?
       return ServiceResult.new(messages:['You lose. Match has finished.']) if has_lost?
       return ServiceResult.new(messages:['You win. Match has finished.']) if has_won?
+      return ServiceResult.new(errors:['Only 5 characters are supported in basic mode']) if basic?
+      return ServiceResult.new(errors:['Only 7 characters are supported in scientific mode']) if scientific?
 
-      check_answer
-
-      ServiceResult.new(
-        object: attempt,
-        messages:["Attempt: #{attempt.count}, Match: #{match.id}"],
-        errors: attempt.errors.full_messages
-      )
+      ServiceResult.new(object: { attempt: check_attempt_answer, letters_colours: attempt })
     end
 
     private
@@ -31,7 +25,7 @@ module Attempts
     end
 
     def attempt
-      @attempt ||= match.attempts.create!(
+      @attempt = match.attempts.create!(
         user_id: match.user_id,
         letters: letters,
         letters_colours: letters_colours
@@ -62,29 +56,10 @@ module Attempts
       match.lose?
     end
 
-    def check_answer
-      user = User.find_by(id: match.user_id)
-      if params[:word] == (match.word.value)
-        match.finished_at = DateTime.current
-        match.status = 1
-        match.save!
-        user.streak += 1
-        if user.streak > user.best_streak
-          user.best_streak = user.streak
-        end
-        user.wins += 1
-        user.save!
-      else
-        if match.attempts.count == 5
-          match.finished_at = DateTime.current
-          match.status = 2
-          user.streak = 0
-          user.losses += 1
+    def check_attempt_answer
+      result = Attempts::CheckAnswer.call(match: match, params: params).object
 
-          user.save!
-          match.save!
-        end
-      end
+      result
     end
 
   end
