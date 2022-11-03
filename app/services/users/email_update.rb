@@ -9,7 +9,7 @@ module Users
     def call
       return valid_email_result unless valid_email_result.success?
       return valid_unconfirmed_email_result unless valid_unconfirmed_email_result.success?
-      return ServiceResult.new(errors:['Wrong credentials']) unless user
+      return ServiceResult.new(errors:[I18n.t('services.users.email_update.wrong_credentials')]) unless user
       email_update!
     end
 
@@ -21,7 +21,7 @@ module Users
       user.new_email_update!(params[:unconfirmed_email])
       user.generate_email_token!
       UserMailer.reset_email_email(user).deliver
-      ServiceResult.new(messages:["Email confirmation has been sent."])
+      ServiceResult.new(messages:[I18n.t('services.users.email_update.confirmation_email_sent')])
     end
 
     def user

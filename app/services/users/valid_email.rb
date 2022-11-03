@@ -7,10 +7,10 @@ module Users
     end
 
     def call
-      return ServiceResult.new(errors: ['Email cannot be blank']) if email.blank?
-      return ServiceResult.new(errors: ['Email format is invalid']) unless valid?(email)
+      return ServiceResult.new(errors: [I18n.t('services.users.valid_email.email_not_found')]) if email.blank?
+      return ServiceResult.new(errors: [I18n.t('services.users.valid_email.email_format_invalid')]) unless valid?(email)
 
-      ServiceResult.new(messages: ['Email format is valid'])
+      ServiceResult.new(messages: [I18n.t('services.users.valid_email.email_format_valid')])
     end
 
     private

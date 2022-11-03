@@ -8,7 +8,7 @@ module Users
 
     def call
       if !user || !user.email_token_valid?
-        return ServiceResult.new(errors:['The link is invalid or it\'s expired.'])
+        return ServiceResult.new(errors:[I18n.t('services.users.change_email.link_invalid')])
       end
 
       change_email!
@@ -24,7 +24,7 @@ module Users
 
     def change_email!
       user.change_email!
-      ServiceResult.new(messages: ["Email updated successfully!"])
+      ServiceResult.new(messages: [I18n.t('services.users.change_email.updated_successfully')])
     end
   end
 end
