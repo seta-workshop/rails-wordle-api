@@ -32,9 +32,9 @@ module Attempts
     end
 
     def update_match_and_attempts
-      return match.update_win if word == match_word
+      return match.update_win! if word == match_word
       if match.attempts.count >= 5
-        match.update_lose
+        match.update_lose!
       end
     end
 
