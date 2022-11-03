@@ -1,0 +1,52 @@
+es:
+  services:
+    words:
+      create:
+        current_word: 'Palabra actual'
+    users:
+      validate_email_update:
+        email_not_found: 'El correo no fue encontrado o es vacío.'
+        current_email_equals_current_email: 'El correo actual no puede ser igual al nuevo.'
+        email_in_use: 'El correo ingresado ya está en uso.'
+      valid_email:
+        email_not_found: 'El correo no fue encontrado o es vacío.'
+        email_format_invalid: 'El formato del correo es inválido.'
+        email_format_valid: 'El formato del correo es válido.'
+      email_update:
+        wrong_credentials: 'Credenciales incorrectas.'
+        confirmation_email_sent: 'El correo de confirmación fue enviado.'
+      change_email:
+        link_invalid: 'El enlace ha expirado o no es válido.'
+        updated_successfully: 'El correo fue actualizado!'
+
+    passwords:
+      create:
+        email_not_found: 'El correo no fue encontrado o es vacío.'
+        email_sent: 'El correo ha sido enviado.'
+      update:
+        new_pswd_blank: 'La nueva clave no se encuentra.'
+        link_invalid: 'El enlace ha expirado o no es válido.'
+        pswd_changed: 'La clave ha sido modificada.'
+
+    matches:
+      create:
+        user_not_present: 'El usuario no se encuentra.'
+        current_match: 'Partido actual.'
+      basic: 'Básico.'
+      scientific: 'Científico.'
+      speed: 'Contrareloj.'
+      custom: 'Personalizado.'
+
+    attempts:
+      create:
+        match_lost: 'Has perdido, partido terminado.'
+        match_won: 'Has ganado, partido terminado.'
+        basic_mode_characters: 'Sólo están permitidos palabras de 5 caracteres en el modo básico.'
+        scientific_mode_characters: 'Sólo están permitidos palabras de 7 caracteres en el modo científico.'
+      colors:
+        green: 'Verde.'
+        gray: 'Gris.'
+        yellow: 'Amarillo.'
+
+  global:
+    success: 'Éxito.'

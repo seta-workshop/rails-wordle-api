@@ -30,4 +30,54 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  services:
+    words:
+      create:
+        current_word: 'Current word.'
+    users:
+      validate_email_update:
+        email_not_found: 'Email not found or it is blank.'
+        current_email_equals_current_email: 'Current email and new email cant be the same.'
+        email_in_use: 'Email address already in use.'
+      valid_email:
+        email_not_found: 'Email not found or it is blank.'
+        email_format_invalid: 'Invalid email format.'
+        email_format_valid: 'Valid email format.'
+      email_update:
+        wrong_credentials: 'Wrong credentials.'
+        confirmation_email_sent: 'Confirmation email has been sent.'
+      change_email:
+        link_invalid: 'Link has expired or it is invalid.'
+        updated_successfully: 'Email updated!'
+
+    passwords:
+      create:
+        email_not_found: 'Email not found or it is blank.'
+        email_sent: 'Email has been sent.'
+      update:
+        new_pswd_blank: 'New password not found.'
+        link_invalid: 'Link has expired or it is invalid.'
+        pswd_changed: 'Password has been changed.'
+
+    matches:
+      create:
+        user_not_present: 'User not present.'
+        current_match: 'Current match.'
+      basic: 'Basic.'
+      scientific: 'Scientific.'
+      speed: 'Speed.'
+      custom: 'Custom.'
+
+    attempts:
+      create:
+        match_lost: 'You lose. Match finished.'
+        match_won: 'You win. Match finished.'
+        basic_mode_characters: 'Only 5 characters are supported in basic mode.'
+        scientific_mode_characters: 'Only 7 characters are supported in scientific mode.'
+      colors:
+        green: 'Green.'
+        gray: 'Gray.'
+        yellow: 'Yellow.'
+
+  global:
+    success: 'Success.'

@@ -67,6 +67,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'magic_frozen_string_literal'
   gem 'faker'
+  gem 'rails-i18n'
 end
 
 group :test do
