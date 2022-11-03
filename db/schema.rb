@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_14_143253) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_31_203606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_143253) do
     t.bigint "word_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["user_id"], name: "index_matches_on_user_id"
     t.index ["word_id"], name: "index_matches_on_word_id"
   end
@@ -52,6 +53,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_143253) do
     t.string "unconfirmed_email"
     t.string "reset_email_token"
     t.datetime "reset_email_sent_at"
+    t.integer "wins", default: 0
+    t.integer "losses", default: 0
+    t.integer "streak", default: 0
+    t.integer "best_streak", default: 0
   end
 
   create_table "words", force: :cascade do |t|
