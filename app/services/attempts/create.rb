@@ -8,10 +8,11 @@ module Attempts
     end
 
     def call
-      return ServiceResult.new(messages:['You lose. Match has finished.']) if has_lost?
-      return ServiceResult.new(messages:['You win. Match has finished.']) if has_won?
-      return ServiceResult.new(errors:['Only 5 characters are supported in basic mode']) if basic?
-      return ServiceResult.new(errors:['Only 7 characters are supported in scientific mode']) if scientific?
+      return ServiceResult.new(messages:[I18n.t('services.attempts.create.match_lost')]) if has_lost?
+      return ServiceResult.new(messages:[I18n.t('services.attempts.create.match_won')]) if has_won?
+      return ServiceResult.new(errors:[(I18n.t 'services.attempts.create.basic_mode_characters')]) if basic?
+      return ServiceResult.new(errors:[(I18n.t 'services.attempts.create.scientific_mode_characters')]) if scientific?
+
       check_attempt_answer
 
       ServiceResult.new(object: { attempt_count: match.attempts.count, attempt_answer: match_word, typed_word: word, letters_colours: attempt, match_status: match.status})

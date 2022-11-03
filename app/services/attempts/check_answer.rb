@@ -13,7 +13,7 @@ module Attempts
     def call
       update_match_and_attempts
 
-      ServiceResult.new(messages: ['Success'])
+      ServiceResult.new(messages: [I18n.t('global.success')])
     end
 
     private

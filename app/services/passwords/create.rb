@@ -8,7 +8,7 @@ module Passwords
 
     def call
       return valid_email_result unless valid_email_result.success?
-      return ServiceResult.new(errors: ['Email address not found. Check and try again.']) if user.blank?
+      return ServiceResult.new(errors: [I18n.t('services.passwords.create.email_not_found')]) if user.blank?
 
       send_password_token_email!
     end
@@ -21,7 +21,7 @@ module Passwords
       user.generate_password_token!
       UserMailer.reset_password_email(user).deliver
 
-      ServiceResult.new(messages: ['Email has been sent.'])
+      ServiceResult.new(messages: [I18n.t('services.passwords.create.email_sent')])
     end
 
     def user

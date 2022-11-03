@@ -7,9 +7,9 @@ module Passwords
     end
 
     def call
-      return ServiceResult.new(errors:['New password not present']) if params[:password].blank?
+      return ServiceResult.new(errors:[I18n.t('services.passwords.update.new_pswd_blank')]) if params[:password].blank?
       if !user.present? || !user.password_token_valid?
-        return ServiceResult.new(errors:['Link not valid or expired. Try generating new link.'])
+        return ServiceResult.new(errors:[I18n.t('services.passwords.update.link_invalid')])
       end
 
       update_password!
@@ -26,7 +26,7 @@ module Passwords
     def update_password!
       user.reset_password!(params[:password])
 
-      ServiceResult.new(messages:['Password has been changed'])
+      ServiceResult.new(messages:[I18n.t('services.passwords.update.pswd_changed')])
     end
 
   end

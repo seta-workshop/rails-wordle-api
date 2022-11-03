@@ -8,7 +8,7 @@ module Users
     end
 
     def call
-      return ServiceResult.new(errors:"Email not found or is blank.") if params[:unconfirmed_email].blank?
+      return ServiceResult.new(errors:I18n.t('services.users.validate_email_update.email_not_found')) if params[:unconfirmed_email].blank?
 
       validate_email_update
     end
@@ -18,10 +18,10 @@ module Users
     attr_reader :params
 
     def validate_email_update
-      return ServiceResult.new(errors:['Current Email and New Email cannot be the same']) if params[:unconfirmed_email] == @current_user.email
-      return ServiceResult.new(errors:['Email already in use.']) if User.email_used?(params[:unconfirmed_email])
+      return ServiceResult.new(errors:[I18n.t('services.users.validate_email_update.current_email_equals_current_email')]) if params[:unconfirmed_email] == @current_user.email
+      return ServiceResult.new(errors:[I18n.t('services.users.validate_email_update.email_in_use')]) if User.email_used?(params[:unconfirmed_email])
 
-      return ServiceResult.new(messages: ['Success'])
+      return ServiceResult.new(messages: [I18n.t('global.success')])
     end
   end
 end
