@@ -76,8 +76,13 @@ en:
         scientific_mode_characters: 'Only 7 characters are supported in scientific mode.'
       colors:
         green: 'Green.'
-        gray: 'Gray.'
+        grey: 'Grey.'
         yellow: 'Yellow.'
-
+  models:
+    match:
+      max_attempts_reached: 'Max attempts reached.'
+    word:
+      basic_length_error: 'Basic kind of words must be only 5 characters long.'
+      scientific_length_error: 'Scientific kind of words must be only 5 characters long.'
   global:
     success: 'Success.'

@@ -8,10 +8,10 @@ module Matches
     end
 
     def call
-      return ServiceResult.new(errors: ['User not present']) unless user
+      return ServiceResult.new(errors: [I18n.t('services.matches.create.user_not_present')]) unless user
       return word_result unless word_result.success?
 
-      ServiceResult.new(object: match, messages:['Current match'])
+      ServiceResult.new(object: match, messages:[I18n.t('services.matches.create.current_match')])
     end
 
     private

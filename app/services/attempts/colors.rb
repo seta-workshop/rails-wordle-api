@@ -4,7 +4,7 @@ module Attempts
   class Colors < Service
     GREEN = I18n.t('services.attempts.colors.green')
     YELLOW = I18n.t('services.attempts.colors.yellow')
-    GREY = I18n.t('services.attempts.colors.gray')
+    GREY = I18n.t('services.attempts.colors.grey')
     CHECKED_CHAR = '-'
 
     def initialize(word:, try:)
@@ -17,7 +17,7 @@ module Attempts
     def call
       green_letters
       yellow_and_grey_letters
-      ServiceResult.new(object: result, messages: ['Success'])
+      ServiceResult.new(object: result, messages: [I18n.t('services.global.success')])
     end
 
     private

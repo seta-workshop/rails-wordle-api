@@ -7,7 +7,7 @@ module Words
     end
 
     def call
-      ServiceResult.new(object: word, messages:['Current word'])
+      ServiceResult.new(object: word, messages:[I18n.t('services.words.create.current_word')])
     end
 
     private

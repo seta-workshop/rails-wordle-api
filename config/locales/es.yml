@@ -45,7 +45,7 @@ es:
         scientific_mode_characters: 'Sólo están permitidos palabras de 7 caracteres en el modo científico.'
       colors:
         green: 'Verde.'
-        gray: 'Gris.'
+        grey: 'Gris.'
         yellow: 'Amarillo.'
 
   global:
