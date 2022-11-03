@@ -12,13 +12,22 @@ module Attempts
       return ServiceResult.new(messages:['You win. Match has finished.']) if has_won?
       return ServiceResult.new(errors:['Only 5 characters are supported in basic mode']) if basic?
       return ServiceResult.new(errors:['Only 7 characters are supported in scientific mode']) if scientific?
+      check_attempt_answer
 
-      ServiceResult.new(object: { attempt: check_attempt_answer, letters_colours: attempt })
+      ServiceResult.new(object: { attempt_count: match.attempts.count, attempt_answer: match_word, typed_word: word, letters_colours: attempt, match_status: match.status})
     end
 
     private
 
     attr_reader :match, :params
+
+    def word
+      @word ||= params[:word].downcase
+    end
+
+    def match_word
+      @match_word ||= match.word.value.downcase
+    end
 
     def letters
       @letters ||= params[:word].split('')
@@ -28,14 +37,15 @@ module Attempts
       @attempt = match.attempts.create!(
         user_id: match.user_id,
         letters: letters,
-        letters_colours: letters_colours
+        letters_colours: letters_colours.object
       )
+
+      letters_colours.object
     end
 
     def letters_colours
-      word = Word.find(match.word_id).value
-      try = params[:word]
-      result = Attempts::Colors.call(word: word, try: try).object[:result]
+      result = Attempts::Colors.call(word: match_word, try: word)
+      return ServiceResult.new(errors:[result.errors]) unless result.success?
 
       result
     end
@@ -57,10 +67,10 @@ module Attempts
     end
 
     def check_attempt_answer
-      result = Attempts::CheckAnswer.call(match: match, params: params).object
+      result = Attempts::CheckAnswer.call(match: match, params: params)
+      return ServiceResult.new(errors:[result.errors]) unless result.success?
 
       result
     end
-
   end
 end

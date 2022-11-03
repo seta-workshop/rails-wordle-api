@@ -24,4 +24,25 @@ class Match < ApplicationRecord
       throw(:abort)
     end
   end
+
+  def update_win
+    match.finished_at = DateTime.current
+    match.status = WIN
+    user.streak += 1
+    user.best_streak = user.streak unless user.best_streak > user.streak
+    user.wins += 1
+    user.save!
+    match.save!
+    status = WIN
+  end
+
+  def update_lose
+    match.finished_at = DateTime.current
+      match.status = LOSE
+      user.streak = 0
+      user.losses += 1
+      user.save!
+      match.save!
+      status = LOSE
+  end
 end

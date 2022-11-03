@@ -8,17 +8,16 @@ module Attempts
     CHECKED_CHAR = '-'
 
     def initialize(word:, try:)
-      @word = word.downcase
-      @word_copy = word.dup.downcase
-      @try = try.downcase
+      @word = word
+      @word_copy = word.dup
+      @try = try
       @result = [nil] * word.length
     end
 
     def call
       green_letters
       yellow_and_grey_letters
-
-      ServiceResult.new(object: { word: word, try: try, result: result })
+      ServiceResult.new(object: result, messages: ['Success'])
     end
 
     private
@@ -26,7 +25,7 @@ module Attempts
     attr_reader :word, :word_copy, :try, :result
 
     def green_letters
-      try.length.times do |i|
+      try.length.times do |i|0
         next unless try[i] == word[i]
 
         result[i] = GREEN
