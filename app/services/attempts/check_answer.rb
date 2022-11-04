@@ -32,6 +32,7 @@ module Attempts
     end
 
     def update_match_and_attempts
+      byebug
       return match.update_win! if word == match_word
       if match.attempts.count >= 5
         match.update_lose!

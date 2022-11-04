@@ -17,13 +17,12 @@ class Match < ApplicationRecord
   def update_win!
     user = self.user
     self.finished_at = DateTime.current
-    self.status = WIN
+    self.status = 1
     user.streak += 1
     user.best_streak = user.streak unless user.best_streak > user.streak
     user.wins += 1
     user.save!
     self.save!
-    status = WIN
   end
 
   def update_lose!
