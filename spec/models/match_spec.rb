@@ -11,7 +11,7 @@ RSpec.describe 'Match model', type: :model do
   context 'When a new match is created' do
 
     context 'when User is not referenced to the Match' do
-      it 'returns a message regarding \'User must exist\'' do
+      it 'returns \'User must exist\' as a message' do
         match.word_id = word.id
         expect(match).to be_invalid
         expect(match.errors.first.full_message).to eq('User must exist')
@@ -19,7 +19,7 @@ RSpec.describe 'Match model', type: :model do
     end
 
     context 'when Word is not referenced to the Match' do
-      it 'returns a message regarding \'Word must exist\'' do
+      it 'returns \'Word must exist\' as a message' do
         match.user_id = user.id
 
         expect(match).to be_invalid
@@ -28,7 +28,7 @@ RSpec.describe 'Match model', type: :model do
     end
 
     context 'when mode is not included in modes list'do
-      it 'returns error, regarding match its invalid' do
+      it 'returns that match its invalid as an error message' do
         match.user_id = user.id
         match.word_id = word.id
         expect(match).to be_invalid
@@ -48,7 +48,7 @@ RSpec.describe 'Match model', type: :model do
         end
       end
 
-      it 'returns a message regarding max attempts count was reached' do
+      it 'returns max attempts count was reached as a message' do
         a = match.attempts.create(
           user_id: match.user_id,
           letters: ['a','a','a','a','a'],
