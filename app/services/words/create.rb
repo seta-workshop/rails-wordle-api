@@ -36,7 +36,6 @@ module Words
       while !created
         if !Word.find_by(value: rand_word)
           created = true
-          byebug
           return Word.create(kind:'basic', value: rand_word)
         end
       end

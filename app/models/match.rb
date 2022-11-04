@@ -15,8 +15,6 @@ class Match < ApplicationRecord
   validates :status, presence: true
 
   def update_win!
-    byebug
-
     user = self.user
     self.finished_at = DateTime.current
     self.status = 1
@@ -28,8 +26,6 @@ class Match < ApplicationRecord
   end
 
   def update_lose!
-    byebug
-
     user = self.user
     self.finished_at = DateTime.current
     self.status = 2
