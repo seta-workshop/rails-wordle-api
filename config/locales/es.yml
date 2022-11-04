@@ -47,6 +47,16 @@ es:
         green: 'Verde.'
         grey: 'Gris.'
         yellow: 'Amarillo.'
-
+  models:
+    match:
+      attempts:
+        errors:
+          count: 'Cantidad máxima de intentos alcanzada.'
+    word:
+      value:
+        errors:
+          length:
+            scientific: 'Las palabras de tipo científico debe tener 7 letras.'
+            basic: 'Las palabras de tipo básico debe tener 5 letras.'
   global:
     success: 'Éxito.'
