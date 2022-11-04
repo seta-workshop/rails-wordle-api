@@ -22,17 +22,25 @@ module Words
     def generate_from_dictionary
       path = File.join(Rails.root, 'lib', 'files','words.txt')
       file = File.open(path, "r")
+      lines = []
 
       file.each_line do |line|
         value = line[0..4]
-        created = false
+        lines.push(value)
+      end
+      file.close
 
-        if !Word.find_by(value: value)
-          return Word.create(kind:'basic', value: value)
+      rand_word_index = rand(0..lines.length)
+      rand_word = lines.values_at(rand_word_index).to_sentence.downcase
+      created = false
+      while !created
+        if !Word.find_by(value: rand_word)
+          created = true
+          byebug
+          return Word.create(kind:'basic', value: rand_word)
         end
       end
-      f.close
-    end
 
+    end
   end
 end
