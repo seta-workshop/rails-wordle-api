@@ -83,6 +83,6 @@ en:
       max_attempts_reached: 'Max attempts reached.'
     word:
       basic_length_error: 'Basic kind of words must be only 5 characters long.'
-      scientific_length_error: 'Scientific kind of words must be only 5 characters long.'
+      scientific_length_error: 'Scientific kind of words must be only 7 characters long.'
   global:
     success: 'Success.'

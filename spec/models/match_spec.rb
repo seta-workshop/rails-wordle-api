@@ -48,7 +48,7 @@ RSpec.describe 'Match model', type: :model do
         end
       end
 
-      it 'returns \'Max attempts reached\'' do
+      it I18n.t('models.match.max_attempts_reached') do
         a = match.attempts.create(
           user_id: match.user_id,
           letters: ['a','a','a','a','a'],
@@ -56,7 +56,7 @@ RSpec.describe 'Match model', type: :model do
         )
 
         # expect(a).to be_invalid
-        expect(a.errors.full_messages).to eq(['Max attempts reached'])
+        expect(a.errors.full_messages).to eq([I18n.t('models.match.max_attempts_reached')])
       end
     end
 
