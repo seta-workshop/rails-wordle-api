@@ -13,10 +13,10 @@ class Word < ApplicationRecord
 
   def length_fits_kind
     if self.basic? && self.value.length != 5
-      return errors.add(:base, I18n.t('models.word.basic_length_error'))
+      return errors.add(:base, I18n.t('models.word.value.errors.length.basic'))
 
     elsif self.scientific? && self.value.length != 7
-      return errors.add(:base, I18n.t('models.word.scientific_length_error'))
+      return errors.add(:base, I18n.t('models.word.value.errors.length.scientific'))
     end
   end
 

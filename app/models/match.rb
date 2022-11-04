@@ -42,7 +42,7 @@ class Match < ApplicationRecord
     attempt.count = attempts.count + 1
 
     if attempt.count > MAX_ATTEMPTS
-      attempt.errors.add(:base, I18n.t('models.match.max_attempts_reached'))
+      attempt.errors.add(:base, I18n.t('models.match.attempts.errors.count'))
       throw(:abort)
     end
   end

@@ -80,9 +80,14 @@ en:
         yellow: 'Yellow.'
   models:
     match:
-      max_attempts_reached: 'Max attempts reached.'
+      attempts:
+        errors:
+          count: 'Max attempts reached.'
     word:
-      basic_length_error: 'Basic kind of words must be only 5 characters long.'
-      scientific_length_error: 'Scientific kind of words must be only 7 characters long.'
+      value:
+        errors:
+          length:
+            scientific: 'Scientific kind of words must be only 7 characters long.'
+            basic: 'Basic kind of words must be only 5 characters long.'
   global:
     success: 'Success.'
