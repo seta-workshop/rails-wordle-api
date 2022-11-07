@@ -1,16 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
   post 'api/v1/auth/login', to: 'api/v1/authentication#login'
-
-
-
-
-
 
   namespace :api do
     namespace :v1 do
@@ -24,7 +15,6 @@ Rails.application.routes.draw do
       resources(:matches, only: [:create]) do
         post :attempts, to: 'matches/attempts#create'
       end
-
     end
   end
 end
