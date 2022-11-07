@@ -9,9 +9,7 @@ Rails.application.routes.draw do
 
 
 
-  resources(:passwords, only: [:update], param: :token) do
-    post 'forgot', to: 'passwords#create', on: :collection
-  end
+
 
 
   namespace :api do
@@ -19,6 +17,9 @@ Rails.application.routes.draw do
       resources(:matches, only: [:create])
       resources(:users, only: %i[index, create])
       resources(:emails, only: [:create, :update], param: :token)
+      resources(:passwords, only: [:update], param: :token) do
+        post 'forgot', to: 'passwords#create', on: :collection
+      end
 
       resources(:matches, only: [:create]) do
         post :attempts, to: 'matches/attempts#create'
