@@ -15,9 +15,14 @@ Rails.application.routes.draw do
 
   resources(:emails, only: [:create, :update], param: :token)
 
-  namespace :matches do
-    resources(:matches, only: [:create]) do
-      resources(:attempts, only: [:create])
+  namespace :api do
+    namespace :v1 do
+      resources(:matches, only: [:create])
+
+      resources(:matches, only: [:create]) do
+        post :attempts, to: 'matches/attempts#create'
+      end
+
     end
   end
 end
