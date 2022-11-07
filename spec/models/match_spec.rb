@@ -55,7 +55,6 @@ RSpec.describe 'Match model', type: :model do
           letters_colours: ['a','a','a','a','a']
         )
 
-        # expect(a).to be_invalid
         expect(a.errors.full_messages).to eq(['Max attempts reached.'])
       end
     end

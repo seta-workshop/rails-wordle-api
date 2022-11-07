@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 module Attempts
   class Create < Service
     def initialize(match:, params:)
