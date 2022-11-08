@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe 'Word Model Spec', type: :model do
   subject(:word) { Word.new(kind: kind, value: value) }
 
