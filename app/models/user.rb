@@ -64,16 +64,11 @@ class User < ApplicationRecord
   end
 
   def win!
-    self.streak += 1
-    self.best_streak = self.streak unless self.best_streak > self.streak
-    self.wins += 1
-    self.save!
+    update!(streak: streak + 1, best_streak: [best_streak, streak + 1].max, wins: wins + 1)
   end
 
   def lose!
-    self.streak = 0
-    self.losses += 1
-    self.save!
+    update!(streak: 0, losses: losses + 1)
   end
 
   private
