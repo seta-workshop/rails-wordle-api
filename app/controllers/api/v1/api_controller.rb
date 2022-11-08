@@ -10,16 +10,16 @@ module Api
       before_action :check_format
       skip_before_action :verify_authenticity_token
 
-    rescue_from StandardError,                       with: :render_fatal_error
-    rescue_from ActiveRecord::RecordNotUnique,       with: :render_fatal_error
-    rescue_from ActiveRecord::RecordInvalid,         with: :render_record_error
-    rescue_from ActiveRecord::RecordNotSaved,        with: :render_record_error
-    rescue_from ActionController::RoutingError,      with: :render_standard_error
+      rescue_from StandardError,                       with: :render_fatal_error
+      rescue_from ActiveRecord::RecordNotUnique,       with: :render_fatal_error
+      rescue_from ActiveRecord::RecordInvalid,         with: :render_record_error
+      rescue_from ActiveRecord::RecordNotSaved,        with: :render_record_error
+      rescue_from ActionController::RoutingError,      with: :render_standard_error
 
       private
 
       def render_error_json(errors, status = :bad_request)
-        render json: { status 'error', errors: errors }, status: status
+        render json: { errors: errors }, status: status
       end
 
       def render_standard_error(exception)
