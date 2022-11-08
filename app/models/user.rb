@@ -63,6 +63,19 @@ class User < ApplicationRecord
     end
   end
 
+  def win!
+    self.streak += 1
+    self.best_streak = self.streak unless self.best_streak > self.streak
+    self.wins += 1
+    self.save!
+  end
+
+  def lose!
+    self.streak = 0
+    self.losses += 1
+    self.save!
+  end
+
   private
 
   def generate_token

@@ -15,23 +15,14 @@ class Match < ApplicationRecord
   validates :status, presence: true
 
   def update_win!
-    user = self.user
     self.finished_at = DateTime.current
     self.status = 1
-    user.streak += 1
-    user.best_streak = user.streak unless user.best_streak > user.streak
-    user.wins += 1
-    user.save!
     self.save!
   end
 
   def update_lose!
-    user = self.user
     self.finished_at = DateTime.current
     self.status = 2
-    user.streak = 0
-    user.losses += 1
-    user.save!
     self.save!
   end
 
