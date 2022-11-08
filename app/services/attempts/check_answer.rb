@@ -12,12 +12,13 @@ module Attempts
     end
 
     def call
-      update_match_and_attempts
+      update_match_and_attempts!
 
       ServiceResult.new(messages: [I18n.t('global.success')])
     end
 
     private
+
     attr_reader :match, :params
 
     def user
@@ -32,17 +33,12 @@ module Attempts
       @match_word ||= match.word.value.downcase
     end
 
-    def update_match_and_attempts
+    def update_match_and_attempts!
       if word == match_word
-        match.update_win!
-        match.user.win!
-      else
-        if match.attempts.count >= 5
-          match.user.lose!
-          match.update_lose!
-        end
+        match.win!
+      elsif match.attempts.count >= Match::MAX_ATTEMPTS
+        match.lose!
       end
-
     end
   end
 end

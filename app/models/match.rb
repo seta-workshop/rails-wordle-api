@@ -14,16 +14,18 @@ class Match < ApplicationRecord
   validates :mode, presence: true
   validates :status, presence: true
 
-  def update_win!
-    self.finished_at = DateTime.current
-    self.status = 1
-    self.save!
+  def win!
+    ApplicationRecord.transaction do
+      update!(finished_at: DateTime.current, status: :win)
+      user.win!
+    end
   end
 
-  def update_lose!
-    self.finished_at = DateTime.current
-    self.status = 2
-    self.save!
+  def lose!
+    ApplicationRecord.transaction do
+      update!(finished_at: DateTime.current, status: :lose)
+      user.lose!
+    end
   end
 
   private
