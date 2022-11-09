@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Update Email', type: :request do
   subject(:api_request) do
     put(
-      email_path(token),
+      api_v1_email_path(token),
       as: :json
     )
   end
@@ -26,14 +26,14 @@ RSpec.describe 'Update Email', type: :request do
 
       it 'returns that \'token is invalid or it expired\'' do
         expect(response).to have_http_status(:bad_request)
-        expect(JSON.parse(response.body)['errors']).to eq(['The link is invalid or it\'s expired.'])
+        expect(JSON.parse(response.body)['errors']).to eq(['Link has expired or it is invalid.'])
       end
     end
     context 'when token is valid' do
 
       it 'unconfirmed email siwtches to the main email' do
         expect(response).to have_http_status(:ok)
-        expect(JSON.parse(response.body)['messages']).to eq(['Email updated successfully!'])
+        expect(JSON.parse(response.body)['messages']).to eq(['Email updated!'])
       end
     end
 

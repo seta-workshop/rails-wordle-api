@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'POST /passwords/forgot', type: :request do
-  subject(:api_request) { post(forgot_passwords_path, params: params, as: :json) }
+  subject(:api_request) { post(forgot_api_v1_passwords_path, params: params, as: :json) }
 
   let(:email)  { Faker::Internet.free_email }
   let(:params) { { email: email } }

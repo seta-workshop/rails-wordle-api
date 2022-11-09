@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'PUT /passwords/:token', type: :request do
-  subject(:api_request) { put(password_path(token), params: params, as: :json)}
+  subject(:api_request) { put(api_v1_password_path(token), params: params, as: :json)}
 
   let(:user)     { create(:user ) }
   let(:token)    { user.reset_password_token }
@@ -32,15 +32,15 @@ RSpec.describe 'PUT /passwords/:token', type: :request do
         user.save
         api_request
       end
-      let(:result) { ServiceResult.new(errors:['Link not valid or expired. Try generating new link.']) }
+      let(:result) { ServiceResult.new(errors:['Link has expired or it is invalid.']) }
       it 'returns an error' do
-        expect(JSON.parse(response.body)['errors']).to eq(['Link not valid or expired. Try generating new link.'])
+        expect(JSON.parse(response.body)['errors']).to eq(['Link has expired or it is invalid.'])
         expect(response).to have_http_status(:bad_request)
       end
     end
     context 'when the password is not present' do
       let(:password) {}
-      let(:result) { ServiceResult.new(errors:['New password not present']) }
+      let(:result) { ServiceResult.new(errors:['New password not found.']) }
       before(:each) do
         user.generate_password_token!
         api_request
@@ -48,7 +48,7 @@ RSpec.describe 'PUT /passwords/:token', type: :request do
 
       it 'returns an error' do
         expect(response).to have_http_status(:bad_request)
-        expect(JSON.parse(response.body)['errors']).to eq(['New password not present'])
+        expect(JSON.parse(response.body)['errors']).to eq(['New password not found.'])
       end
     end
   end

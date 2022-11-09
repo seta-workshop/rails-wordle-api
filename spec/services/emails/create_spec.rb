@@ -23,8 +23,8 @@ RSpec.describe 'EmailUpdate Service', type: :service do
           unconfirmed_email: " "
         }
       end
-      it 'returns \'Email cannot be blank\'' do
-        expect(service_call.errors).to eq(['Email cannot be blank'])
+      it 'returns \'Email not found or it is blank.\'' do
+        expect(service_call.errors).to eq(['Email not found or it is blank.'])
       end
     end
 
@@ -35,8 +35,8 @@ RSpec.describe 'EmailUpdate Service', type: :service do
           unconfirmed_email: user.unconfirmed_email
         }
       end
-      it 'returns \'Email cannot be blank\'' do
-        expect(service_call.errors).to eq(['Email cannot be blank'])
+      it 'returns \'Email not found or it is blank.\'' do
+        expect(service_call.errors).to eq(['Email not found or it is blank.'])
       end
     end
 
@@ -47,8 +47,8 @@ RSpec.describe 'EmailUpdate Service', type: :service do
       unconfirmed_email: "WRONG_EMAIL"
     }
   end
-      it 'returns \'Email format is invalid\'' do
-        expect(service_call.errors).to eq(['Email format is invalid'])
+      it 'returns \'Invalid email format.\'' do
+        expect(service_call.errors).to eq(['Invalid email format.'])
       end
     end
 
@@ -59,8 +59,8 @@ RSpec.describe 'EmailUpdate Service', type: :service do
       unconfirmed_email: user.unconfirmed_email
     }
   end
-      it 'returns \'Email format is invalid\'' do
-        expect(service_call.errors).to eq(['Email format is invalid'])
+      it 'returns \'Invalid email format.\'' do
+        expect(service_call.errors).to eq(['Invalid email format.'])
       end
     end
 
@@ -71,14 +71,14 @@ RSpec.describe 'EmailUpdate Service', type: :service do
         unconfirmed_email: user.unconfirmed_email
       }
     end
-      it 'returns \'Wrong credentials\'' do
-        expect(service_call.errors).to eq(['Wrong credentials'])
+      it 'returns \'Wrong credentials.\'' do
+        expect(service_call.errors).to eq(['Wrong credentials.'])
       end
     end
 
     context 'Credentials and new Unconfirmed email are valid'do
-      it 'returns \'Email confirmation has been sent.\'' do
-        expect(service_call.messages).to eq(['Email confirmation has been sent.'])
+      it 'returns \'Confirmation email has been sent.\'' do
+        expect(service_call.messages).to eq(['Confirmation email has been sent.'])
       end
     end
   end

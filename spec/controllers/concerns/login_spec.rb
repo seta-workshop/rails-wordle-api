@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'POST /auth/login', type: :request do
   subject(:api_request) do
      post(
-      auth_login_path(params: params),
+      api_v1_auth_login_path(params: params),
       as: :json
     )
   end

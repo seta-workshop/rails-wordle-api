@@ -22,24 +22,24 @@ RSpec.describe 'Create password service', type: :service do
     context 'Email is blank' do
       let(:email) { "" }
 
-      it 'returns \'Email cannot be blank\'' do
-        expect(service_call.error).to eq('Email cannot be blank')
+      it 'returns \'Email not found or it is blank.\'' do
+        expect(service_call.error).to eq('Email not found or it is blank.')
       end
     end
 
     context 'Email adress not found' do
       let(:email){ Faker::Internet.email }
 
-      it 'returns \'Email address not found. Check and try again.\'' do
-        expect(service_call.error).to eq('Email address not found. Check and try again.')
+      it 'returns \'Email not found or it is blank.\'' do
+        expect(service_call.error).to eq('Email not found or it is blank.')
       end
     end
 
     context 'Email format is invalid' do
       let(:email) {"WRONG_EMAIL"}
       let!(:user)   { create(:user, email: Faker::Internet.email) }
-      it 'reurns \'Email format is invalid\'' do
-        expect(service_call.error).to eq('Email format is invalid')
+      it 'reurns \'Invalid email format.\'' do
+        expect(service_call.error).to eq('Invalid email format.')
       end
     end
   end

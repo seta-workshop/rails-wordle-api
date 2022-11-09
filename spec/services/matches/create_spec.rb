@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Create Match Service', type: :service do
   subject(:service_call) { Matches::Create.call(params: params, user: user) }
-  let(:params) {  }
+  let(:params) { {mode: 'basic'} }
   let(:user) { create(:user) }
   let!(:word) { create(:word, kind: 'basic', value: 'siete') }
 
@@ -19,7 +19,7 @@ RSpec.describe 'Create Match Service', type: :service do
 
     context 'User does not have a match associated today' do
       let(:user) { create(:user) }
-      it 'Returns  a new match associated to user' do
+      it 'Returns a new match associated to user' do
         expect { service_call }.to change { Match.count }.by(1)
         expect(service_call.object.user_id).to eq(user.id)
       end
@@ -28,7 +28,7 @@ RSpec.describe 'Create Match Service', type: :service do
     context 'User is not present' do
       let(:user) { }
       it 'Returns \'User not present\'' do
-        expect(service_call.errors).to eq(['User not present'])
+        expect(service_call.errors).to eq(['User not present.'])
       end
     end
   end
