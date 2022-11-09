@@ -16,9 +16,6 @@ module Api
       end
 
       def create
-        @user = User.new(user_params)
-        @user.errors.add(:base, 'hgfgfg')
-        raise ActiveRecord::RecordInvalid, @user
         if @user.save
           render json: @user, status: :created
         else
