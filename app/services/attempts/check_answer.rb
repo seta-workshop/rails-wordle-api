@@ -7,11 +7,13 @@ module Attempts
     LOSE = 2
 
     def initialize(match: ,params:)
-      @match = match.reload
+      @match = match
       @params = params
+      @user_attempt_word = params[:word]
     end
 
     def call
+      return ServiceResult.new(errors: I18n.t('services.attempts.check_user_word.errors')) unless exists_on_dictionary?
       update_match_and_attempts!
 
       ServiceResult.new(messages: [I18n.t('global.success')])
@@ -31,6 +33,20 @@ module Attempts
 
     def match_word
       @match_word ||= match.word.value.downcase
+    end
+
+    def exists_on_dictionary?
+      path = File.join(Rails.root, 'lib', 'files','words.txt')
+      file = File.open(path, "r")
+      lines = []
+
+      file.each_line do |line|
+        value = line[0..4]
+        lines.push(value.downcase)
+      end
+      file.close
+
+      lines.include?(@user_attempt_word)
     end
 
     def update_match_and_attempts!

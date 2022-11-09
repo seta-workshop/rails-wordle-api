@@ -47,6 +47,8 @@ es:
         green: 'Verde.'
         grey: 'Gris.'
         yellow: 'Amarillo.'
+      check_user_word:
+              errors: 'Esa palabra no existe!'
   models:
     match:
       attempts:
