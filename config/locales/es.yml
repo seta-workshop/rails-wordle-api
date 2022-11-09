@@ -58,5 +58,7 @@ es:
           length:
             scientific: 'Las palabras de tipo científico debe tener 7 letras.'
             basic: 'Las palabras de tipo básico debe tener 5 letras.'
+  errors:
+      standard_error: 'Lo sentimos. Algo inesperado ha fallado.'
   global:
     success: 'Éxito.'

@@ -89,5 +89,7 @@ en:
           length:
             scientific: 'Scientific kind of words must be only 7 characters long.'
             basic: 'Basic kind of words must be only 5 characters long.'
+  errors:
+    standard_error: 'We are sorry. Something unexpected failed.'
   global:
     success: 'Success.'
