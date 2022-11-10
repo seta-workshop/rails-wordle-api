@@ -7,8 +7,12 @@ module Api
       # before_action :validate_email_update, only: [:show, :destroy, :update]
 
       def index
-        @users = User.all
-        render json: @users, status: :ok
+        result = Users::Leaderboard.call(params: params)
+        if result.success?
+          render(json: { object: result.object, status: :ok })
+        else
+          render(json: { errors: result.errors, status: :bad_request })
+        end
       end
 
       def show

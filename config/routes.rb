@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources(:matches, only: [:create])
-      resources(:users, only: %i[index, create])
+      resources(:users, only: %i[index create])
       resources(:emails, only: [:create, :update], param: :token)
       resources(:passwords, only: [:update], param: :token) do
         post 'forgot', to: 'passwords#create', on: :collection
