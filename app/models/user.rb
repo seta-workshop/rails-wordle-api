@@ -63,6 +63,14 @@ class User < ApplicationRecord
     end
   end
 
+  def win!
+    update!(streak: streak + 1, best_streak: [best_streak, streak + 1].max, wins: wins + 1)
+  end
+
+  def lose!
+    update!(streak: 0, losses: losses + 1)
+  end
+
   private
 
   def generate_token

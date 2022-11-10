@@ -78,6 +78,8 @@ en:
         green: 'Green.'
         grey: 'Grey.'
         yellow: 'Yellow.'
+      check_user_word:
+        errors: 'That word doesnt exists!'
   models:
     match:
       attempts:

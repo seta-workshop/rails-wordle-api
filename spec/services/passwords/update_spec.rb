@@ -22,8 +22,8 @@ RSpec.describe 'Update password service', type: :service do
       user.save!
       service_call
     end
-    it 'returns \'Link not valid or expired. Try generating new link.\'' do
-      expect(service_call.errors).to eq(['Link not valid or expired. Try generating new link.'])
+    it 'returns \'Link has expired or it is invalid.\'' do
+      expect(service_call.errors).to eq(['Link has expired or it is invalid.'])
     end
   end
 
@@ -34,15 +34,15 @@ RSpec.describe 'Update password service', type: :service do
     end
 
     context 'When token is valid and new password is present' do
-      it 'Returns \'Password has been changed\''do
-        expect(service_call.messages).to eq(['Password has been changed'])
+      it 'Returns \'Password has been changed.\''do
+        expect(service_call.messages).to eq(['Password has been changed.'])
       end
     end
 
     context 'When new password is not present' do
       let(:password) { "" }
-      it 'Returns \'New passwod is not present\''do
-        expect(service_call.errors).to eq(['New password not present'])
+      it 'Returns \'New passwod is not found.\''do
+        expect(service_call.errors).to eq(['New password not found.'])
       end
     end
 

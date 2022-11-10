@@ -10,12 +10,20 @@ module Attempts
     def call
       return ServiceResult.new(messages:[I18n.t('services.attempts.create.match_lost')]) if has_lost?
       return ServiceResult.new(messages:[I18n.t('services.attempts.create.match_won')]) if has_won?
-      return ServiceResult.new(errors:[(I18n.t 'services.attempts.create.basic_mode_characters')]) if basic?
-      return ServiceResult.new(errors:[(I18n.t 'services.attempts.create.scientific_mode_characters')]) if scientific?
 
-      check_attempt_answer
+      raise StandardError.new(I18n.t 'services.attempts.create.basic_mode_characters') if basic?
+      raise StandardError.new(I18n.t 'services.attempts.create.scientific_mode_characters') if scientific?
+      raise StandardError.new(I18n.t('services.attempts.check_user_word.errors')) unless check_attempt_answer.success?
 
-      ServiceResult.new(object: { attempt_count: match.attempts.count, attempt_answer: match_word, typed_word: word, letters_colours: attempt, match_status: match.status})
+      ServiceResult.new(
+        object: {
+          attempt_count: match.attempts.count,
+          attempt_answer: match_word,
+          typed_word: word,
+          letters_colours: attempt,
+          match_status: match.status,
+        }
+      )
     end
 
     private

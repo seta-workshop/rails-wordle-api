@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'POST emails', type: :request do
   subject(:api_request) do
     post(
-      emails_path,
+      api_v1_emails_path,
       params: params,
       headers: headers,
       as: :json
@@ -39,7 +39,7 @@ RSpec.describe 'POST emails', type: :request do
 
       it 'returns \'Email not found.\'' do
         expect(response).to have_http_status(:bad_request)
-        expect(JSON.parse(response.body)['errors']).to eq(['Email cannot be blank'])
+        expect(JSON.parse(response.body)['errors']).to eq(['Email not found or it is blank.'])
       end
     end
 
@@ -48,7 +48,7 @@ RSpec.describe 'POST emails', type: :request do
 
       it 'returns \'email format is not valid\'' do
         expect(response).to have_http_status(:bad_request)
-        expect(JSON.parse(response.body)['errors']).to eq(['Email format is invalid'])
+        expect(JSON.parse(response.body)['errors']).to eq(['Invalid email format.'])
       end
     end
 
@@ -66,7 +66,7 @@ RSpec.describe 'POST emails', type: :request do
 
       it 'returns \'Email confirmation has been sent.\''do
         expect(response).to have_http_status(:ok)
-        expect(JSON.parse(response.body)['messages']).to eq(['Email confirmation has been sent.'])
+        expect(JSON.parse(response.body)['messages']).to eq(['Confirmation email has been sent.'])
       end
     end
 
@@ -80,7 +80,7 @@ RSpec.describe 'POST emails', type: :request do
 
       it 'returns \'Wrong credentials\'' do
         expect(response).to have_http_status(:bad_request)
-        expect(JSON.parse(response.body)['errors']).to eq(['Wrong credentials'])
+        expect(JSON.parse(response.body)['errors']).to eq(['Wrong credentials.'])
       end
     end
 

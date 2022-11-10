@@ -18,8 +18,8 @@ RSpec.describe 'ChangeEmail Service', type: :service do
 
   context 'When user wants to switch its email to unconfirmed mail'do
     context 'Token is valid'do
-      it 'returns \'Email updated successfully!\'' do
-        expect(service_call.messages).to eq(['Email updated successfully!'])
+      it 'returns \'Email updated!\'' do
+        expect(service_call.messages).to eq(['Email updated!'])
       end
     end
 
@@ -28,8 +28,8 @@ RSpec.describe 'ChangeEmail Service', type: :service do
         user.generate_email_token!
         user.reset_email_token = Time.now-10.days
       end
-      it 'returns \'The link is invalid or it\'s expired.' do
-        expect(service_call.errors).to eq(['The link is invalid or it\'s expired.'])
+      it 'returns \'Link has expired or it is invalid.' do
+        expect(service_call.errors).to eq(['Link has expired or it is invalid.'])
       end
     end
 

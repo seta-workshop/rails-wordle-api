@@ -15,7 +15,7 @@ RSpec.describe Attempts::Create, type: :service do
     let(:params) { { word: 'not_valid'} }
 
       it 'returns \'Only 5 characters are supported in basic mode\'' do
-        expect(service_call.errors).to eq(['Only 5 characters are supported in basic mode'])
+        expect(service_call.errors).to eq(['Only 5 characters are supported in basic mode.'])
       end
     end
 
@@ -24,7 +24,7 @@ RSpec.describe Attempts::Create, type: :service do
       let(:params) { { word: 'not_valid'} }
 
       it 'returns \'Only 7 characters are supported in scientific mode\'' do
-        expect(service_call.errors).to eq(['Only 7 characters are supported in scientific mode'])
+        expect(service_call.errors).to eq(['Only 7 characters are supported in scientific mode.'])
       end
     end
 

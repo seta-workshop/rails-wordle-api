@@ -23,8 +23,8 @@ RSpec.describe 'ValidateEmailUpdate Service', type: :service do
           unconfirmed_email: user.email
         }
       end
-      it 'returns \'Current Email and New Email cannot be the same\'' do
-        expect(service_call.errors).to eq(['Current Email and New Email cannot be the same'])
+      it 'returns \'Current email and new email cant be the same.\'' do
+        expect(service_call.errors).to eq(['Current email and new email cant be the same.'])
       end
     end
 
@@ -34,8 +34,8 @@ RSpec.describe 'ValidateEmailUpdate Service', type: :service do
           unconfirmed_email: help_user.email
         }
       end
-      it 'returns \'Email already in use.\'' do
-        expect(service_call.errors).to eq(['Email already in use.'])
+      it 'returns \'Email address already in use.\'' do
+        expect(service_call.errors).to eq(['Email address already in use.'])
       end
     end
 
@@ -44,14 +44,14 @@ RSpec.describe 'ValidateEmailUpdate Service', type: :service do
         { unconfirmed_email: " " }
       end
 
-      it 'returns \'Email not found or is blank.\'' do
-        expect(service_call.errors).to eq(['Email not found or is blank.'])
+      it 'returns \'Email not found or it is blank.\'' do
+        expect(service_call.errors).to eq(['Email not found or it is blank.'])
       end
     end
 
     context 'Everything is valid' do
-      it 'returns \'Success\''do
-        expect(service_call.messages).to eq(['Success'])
+      it 'returns \'Success.\''do
+        expect(service_call.messages).to eq(['Success.'])
       end
     end
   end
