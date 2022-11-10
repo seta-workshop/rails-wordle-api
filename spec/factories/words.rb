@@ -13,6 +13,5 @@ FactoryBot.define do
     #   kind { 'scientific' }
     #   value { Faker::Science.science(5) }
     # end
-
   end
 end

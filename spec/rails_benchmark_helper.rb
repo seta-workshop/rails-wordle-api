@@ -1,11 +1,10 @@
 # frozen_string_literal: true
-ENV['RAILS_ENV'] ||= 'test'
+ENV['RAILS_ENV'] ||= 'benchmark'
 require File.expand_path('../config/environment', __dir__)
-
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort("RAILS_ENV isnt running in benchmark mode!, add RAILS_ENV=benchmark") unless Rails.env.benchmark?
 
 require 'rspec/rails'
-require 'spec_helper'
+require 'spec_benchmark_helper'
 require 'database_cleaner'
 require 'capybara/rspec'
 

@@ -9,7 +9,7 @@ RSpec.describe Attempts::Create, type: :service do
   let(:word) { create(:word) }
 
 
-  context 'when service is called' do
+  context '#call' do
     context 'when match mode is basic and word is not 5 chars long'do
     let(:match) { create(:match, user_id: user.id, word_id: word.id) }
     let(:params) { { word: 'not_valid'} }
@@ -27,6 +27,11 @@ RSpec.describe Attempts::Create, type: :service do
         expect(service_call.errors).to eq(['Only 7 characters are supported in scientific mode.'])
       end
     end
+  end
 
+  context '#call benchmark' do
+    it 'should perform under 50ms' do
+      expect(service_call).to perform_under(50).ms
+    end
   end
 end
