@@ -16,12 +16,12 @@ If you would like to play me, **download me**...
 # 1. Functionalities
 <a name="users"></a>
 ## 1.1 Users
- - Registro de usuarios
- - Inicio de sesión mediante autenticación y autorización mediante JWT token.
- - Cambio de contraseña
- - Cambio de correo electrónico
- - Tabla de puntuaciones
- - Estadísticas
+ - User register
+ - User login with JWT token authorization and autentication.
+ - Password change
+ - Email change
+ - Leaderboard
+ - User stats
 
 <a name="matches"></a>
 ## 1.2 Matches
