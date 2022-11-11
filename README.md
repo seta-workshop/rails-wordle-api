@@ -1,8 +1,8 @@
 
 # Rails Worlde API
-Hola! Soy la API de tu juego favorito, **Wordle**. Si quieres saber más de mi, puedes leerme.
+Hi! Im the API of your favorite game, **Wordle**. If you want to know more about me you can keep reading.
 
-Si quieres jugar conmigo, **descárgame**...
+If you would like to play me, **download me**...
 ![ezwordle logo :)](./public/ezwordle_logo.png)
 
 
