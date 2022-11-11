@@ -1,16 +1,16 @@
+# frozen_string_literal: true
+
 module Users
   class Leaderboard < Service
-    def initialize(params: )
-      @params = params
+    def initialize()
+
     end
 
     def call
-      return ServiceResult.new(object: leaderboard)
+      return ServiceResult.new(object: leaderboard, messages: I18n.t('global.success'))
     end
 
     private
-
-    attr_reader :params
 
     def users
       @users ||= User.all.order('wins DESC')
@@ -18,19 +18,14 @@ module Users
 
     def leaderboard
       leaderboard = []
-      users.each do |u|
-        stats = (
-          {
-            username: u.username,
-            wins: u.wins,
-            losses: u.losses,
-            streak: u.streak,
-            best_streak: u.best_streak}
-          )
-        leaderboard.push(stats)
-      end
+      users.map { |u| leaderboard.push({
+        username: u.username,
+        wins: u.wins,
+        losses: u.losses,
+        streak: u.streak,
+        best_streak: u.best_streak}) }
 
-      return ({leaderboard: leaderboard})
+      { leaderboard: leaderboard }
     end
   end
 end

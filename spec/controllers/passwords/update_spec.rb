@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'PUT /passwords/:token', type: :request do
-  subject(:api_request) { put(api_v1_password_path(token), params: params, as: :json)}
+  subject(:api_request) { put(api_v1_password_path(token), params: params, as: :json) }
 
   let(:user)     { create(:user ) }
   let(:token)    { user.reset_password_token }
