@@ -80,6 +80,9 @@ en:
         yellow: 'Yellow.'
       check_user_word:
         errors: 'That word doesnt exists!'
+    leaderboard:
+      index:
+        errors: 'There are no current users yet!'
   models:
     match:
       attempts:

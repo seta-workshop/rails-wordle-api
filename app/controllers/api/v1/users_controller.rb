@@ -5,16 +5,6 @@ module Api
     class UsersController < Api::V1::ApiController
       skip_before_action :authenticate_request, only: [:create]
       # before_action :validate_email_update, only: [:show, :destroy, :update]
-
-      def index
-        result = Users::Leaderboard.call()
-        if result.success?
-          render(json: { object: result.object, messages: result.messages }, status: :ok)
-        else
-          render(json: { errors: result.errors }, status: :bad_request)
-        end
-      end
-
       def show
         render json: @user, status: :ok
       end

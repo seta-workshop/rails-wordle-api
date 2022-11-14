@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe Api::V1::UsersController, type: :request do
-  subject(:api_request){ get(api_v1_users_path, params: params, headers: headers, as: :json)}
+RSpec.describe Api::V1::LeaderboardController, type: :request do
+  subject(:api_request){ get(api_v1_leaderboard_index_path, params: params, headers: headers, as: :json)}
 
   let!(:user)   { create(:user) }
   let(:token)   { jwt_encode(user_id: user.id) }
@@ -15,18 +15,13 @@ RSpec.describe Api::V1::UsersController, type: :request do
   end
   let(:headers) do
     {
-      "Authorization" => ("Bearer " + token)
+      "Authorization" => ("Bearer #{token}")
     }
-  end
-
-  def jwt_encode(payload, expires_at = 1.days.from_now)
-    payload[:expires_at] = expires_at.to_i
-    JWT.encode(payload, Rails.application.secret_key_base)
   end
 
   before(:each) { api_request }
 
-  context 'When user requests users leaderboard' do
+  context 'when user requests users leaderboard' do
 
     context 'when token is invalid' do
       let(:token) { 'Invalid Token' }
@@ -37,7 +32,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
     end
 
     context 'when token is valid' do
-      it 'returns token is invalid or it expired' do
+      it 'returns success' do
         expect(JSON.parse(response.body)['messages']).to eq(I18n.t('global.success'))
         expect(response).to have_http_status(:ok)
       end

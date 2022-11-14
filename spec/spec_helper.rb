@@ -5,7 +5,14 @@ require File.expand_path('../config/environment', __dir__)
 
 require 'factory_bot_rails'
 
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |file| require file }
+
 RSpec.configure do |config|
+  Dir[Rails.root.join('spec/support/helpers/**/*.rb')].map do |file|
+    helper_name = File.basename(file, '.rb').camelize
+    config.include helper_name.constantize
+  end
+
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
