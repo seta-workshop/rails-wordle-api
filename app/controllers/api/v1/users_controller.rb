@@ -5,12 +5,6 @@ module Api
     class UsersController < Api::V1::ApiController
       skip_before_action :authenticate_request, only: [:create]
       # before_action :validate_email_update, only: [:show, :destroy, :update]
-
-      def index
-        @users = User.all
-        render json: @users, status: :ok
-      end
-
       def show
         render json: @user, status: :ok
       end

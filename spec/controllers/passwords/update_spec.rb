@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'PUT /passwords/:token', type: :request do
-  subject(:api_request) { put(api_v1_password_path(token), params: params, as: :json)}
+  subject(:api_request) { put(api_v1_password_path(token), params: params, as: :json) }
 
   let(:user)     { create(:user ) }
   let(:token)    { user.reset_password_token }
@@ -51,10 +51,5 @@ RSpec.describe 'PUT /passwords/:token', type: :request do
         expect(JSON.parse(response.body)['errors']).to eq(['New password not found.'])
       end
     end
-  end
-
-  def jwt_encode(payload, expires_at = 1.days.from_now)
-    payload[:expires_at] = expires_at.to_i
-    JWT.encode(payload, Rails.application.secret_key_base)
   end
 end

@@ -26,11 +26,6 @@ RSpec.describe 'POST emails', type: :request do
     }
   end
 
-  def jwt_encode(payload, expires_at = 1.days.from_now)
-    payload[:expires_at] = expires_at.to_i
-    JWT.encode(payload, Rails.application.secret_key_base)
-  end
-
   before(:each) { api_request }
 
   context 'when user asks for changing email' do

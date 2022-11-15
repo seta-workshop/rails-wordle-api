@@ -49,6 +49,9 @@ es:
         yellow: 'Amarillo.'
       check_user_word:
               errors: 'Esa palabra no existe!'
+    leaderboard:
+      index:
+        errors: 'No hay usuarios en el podio todavía!'
   models:
     match:
       attempts:
