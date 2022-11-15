@@ -10,7 +10,7 @@ module Leaderboard
     private
 
     def users
-      @users ||= User.all.order('wins DESC').select(:username, :wins, :losses, :streak, :best_streak)
+      @users ||= User.order('wins DESC').select(:id, :username, :wins, :losses, :streak, :best_streak)
     end
   end
 end

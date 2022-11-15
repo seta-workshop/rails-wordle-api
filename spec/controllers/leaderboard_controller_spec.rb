@@ -3,7 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::LeaderboardController, type: :request do
-  subject(:api_request){ get(api_v1_leaderboard_index_path, params: params, headers: headers, as: :json)}
+  subject(:api_request) { get(api_v1_leaderboard_index_path,
+                          params: params,
+                          headers: headers,
+                          as: :json
+                        )}
 
   let!(:user)   { create(:user) }
   let(:token)   { jwt_encode(user_id: user.id) }

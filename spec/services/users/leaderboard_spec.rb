@@ -7,12 +7,12 @@ RSpec.describe Leaderboard::Leaderboard, type: :service do
 
   context 'when user asks for leaderboard table' do
     context 'when table is ordered correctly' do
-      let!(:user) { create(:user, username: 'test', wins: 20) }
+      let!(:user) { create(:user, username: 'test', wins: 10) }
       let!(:user1) { create(:user, username: 'test1', wins: 10) }
-      let!(:user2) { create(:user, username: 'test2', wins: 0) }
+      let!(:user2) { create(:user, username: 'test2', wins: 10) }
       it 'returns leaderboard table in descending order and success message' do
         expect(is_ordered?(leaderboard: service_call.object[:leaderboard])).to be(true)
-        expect(service_call.messages).to eq(I18n.t('global.success'))
+        expect(service_call.messages).to eq('Success.')
       end
     end
 
@@ -29,7 +29,7 @@ RSpec.describe Leaderboard::Leaderboard, type: :service do
     ret = true
     max = 999999
     leaderboard.each do |u|
-      if u.wins < max
+      if u.wins <= max
         max = u.wins
       elsif
         ret = false
