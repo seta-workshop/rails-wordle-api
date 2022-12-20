@@ -2,7 +2,7 @@
 # Rails Worlde API
 Hi! Im the API of your favorite game, **Wordle**. If you want to know more about me you can keep reading.
 
-If you would like to play me, **download me**...
+If you would like to play with me, **download me**...
 ![ezwordle logo :)](./public/ezwordle_logo.png)
 
 
